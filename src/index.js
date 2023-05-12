@@ -1,13 +1,21 @@
 //import {engine} from 'express-handlebars';
 const sass = require('node-sass');
-const express = require('express');
+const express = require('express')
 const morgan = require('morgan');
+const mongoose = require('mongoose');
 const path = require('path');
 const {engine} = require('express-handlebars');
 const app = express();
 const port = 3000;
 
+
+const db = require('./config/db')
+
+// connect DB
+db.connect();
+
 const route = require('./routes');
+
 // HTTP ConseLog
 //app.use(morgan('combined'))
 

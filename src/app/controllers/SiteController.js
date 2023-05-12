@@ -21,4 +21,4 @@ function show(req, res) {
     res.render('search');
 }
 
-module.exports = { index, show };
+module.exports = {index, show};
