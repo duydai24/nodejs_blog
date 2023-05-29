@@ -2,14 +2,14 @@
   "name": "blog",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "index.js",
   "engines": {
     "node": "18.x"
   },
   "scripts": {
     "l": "prettier --single-quote --trailing-comma all --tab-width 4 --write src/**/*.{js,json,scss}",
     "git": "lint-staged",
-    "start": "nodemon --inspect src/index.js",
+    "start": "nodemon --inspect index.js",
     "watch": "node-sass --watch src/resoucres/scss/ --output src/public/css/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
