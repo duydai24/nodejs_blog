@@ -13,7 +13,7 @@
     }
   ],
   "functions": {
-    "src/**/*.js": {
+    "api/**/*.js": {
       "timeout": 50
     }
   }
