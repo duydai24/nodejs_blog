@@ -1,0 +1,28 @@
+<div class='my-4 container'>
+  <p>Khóa học của tôi</p>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th scope='col'>STT</th>
+        <th scope='col'>Tên khóa học</th>
+        <th scope='col'>Chi tiết khóa học</th>
+        <th scope='col'>Thời gian tạo</th>
+        <th scope='col'>Chi tiết</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each courses}}
+        <tr>
+          <th scope='row'>{{sum @index 1}}</th>
+          <td>{{this.name}}</td>
+          <td>{{this.description}}</td>
+          <td>{{this.createdAt}}</td>
+          <td>
+            <a href='/courses/{{this._id}}/edit' class='btn btn-link'>Sửa</a>
+            <a href='' class='btn btn-link'>Xóa</a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

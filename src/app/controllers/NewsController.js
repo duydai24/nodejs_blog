@@ -20,4 +20,4 @@ function show(req, res) {
     res.send('News Detail!');
 }
 
-module.exports = { index, show };
+module.exports = {index, show};

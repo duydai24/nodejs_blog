@@ -1,6 +1,7 @@
 //import {engine} from 'express-handlebars';
 const sass = require('node-sass');
-const express = require('express')
+const express = require('express');
+const methodOverride = require('method-override');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -23,10 +24,13 @@ app.engine(
   'hbs',
   engine({
     extname: '.hbs',
+    helpers: {
+      sum: (a, b) => a + b
+    }
   }),
 );
 app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'resoucres/views'));
+app.set('views', path.join(__dirname, 'resoucres', 'views'));
 
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -39,9 +43,11 @@ app.use(
 );
 app.use(express.json());
 
+app.use(methodOverride('_method'))
+
 //router init - khởi tạo tuyến đường
 route(app);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`App listening on port ${port}`);
 });

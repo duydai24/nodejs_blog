@@ -1,4 +1,12 @@
 h1 {
   color: black;
-  font-size: 30px;
-}
+  font-size: 30px; }
+
+.user-container {
+  display: flex;
+  align-items: center; }
+
+.img-user {
+  width: 28px;
+  height: 28px;
+  border-radius: 100%; }
