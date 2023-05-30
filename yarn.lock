@@ -1008,7 +1008,7 @@ execa@^7.0.0:
     signal-exit "^3.0.7"
     strip-final-newline "^3.0.0"
 
-express-handlebars@^7.0.7:
+express-handlebars@^7.0.6:
   version "7.0.7"
   resolved "https://registry.yarnpkg.com/express-handlebars/-/express-handlebars-7.0.7.tgz#78855740bfd636cd0c3d74e44300d7c1172b8440"
   integrity sha512-O4jUlkEVvqwyhkcmjWOqAEcV3JbcaGnlyS0oSgI3vyXO59Fco5JJtUboU2VHqv3Em3Q0VFC2VhRsmaUeNCOr5Q==
