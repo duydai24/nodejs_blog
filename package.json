@@ -9,7 +9,8 @@
     "start": "nodemon --inspect src/index.js",
     "watch": "node-sass --watch src/resoucres/scss/ --output src/public/css/",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon --inspect src/index.js"
+    "server": "nodemon --inspect src/index.js",
+    "build": "yarn build"
   },
   "lint-staged": {
     "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
