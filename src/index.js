@@ -2,13 +2,15 @@
 const sass = require('node-sass');
 const express = require('express');
 const methodOverride = require('method-override');
+//var mongoose_delete = require('mongoose-delete');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const path = require('path');
 const {engine} = require('express-handlebars');
 const app = express();
-const port = 3000;
+const port = 3001;
 
+mongoose.set('strictQuery', false);
 
 const db = require('./config/db')
 

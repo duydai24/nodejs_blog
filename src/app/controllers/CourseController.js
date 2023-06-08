@@ -63,5 +63,51 @@ function update(req, res, next) {
     });
 }
 
+function deleteCourse(req, res, next) {
+  Course.delete({_id: req.params.id})
+    .then(() => {
+      res.redirect('back');
+    })
+    .catch(err => {
+      next(err);
+    });
+}
 
-module.exports = {index, show, create, store, edit, update};
+function deleteCourseForever(req, res, next) {
+  Course.deleteOne({_id: req.params.id})
+    .then(() => {
+      res.redirect('back');
+    })
+    .catch(err => {
+      next(err);
+    });
+}
+
+function restore(req, res, next) {
+  Course.restore({_id: req.params.id})
+    .then(() => {
+      res.redirect('back');
+    })
+    .catch(err => {
+      next(err);
+    });
+}
+
+
+function handleFormAction(req, res, next) {
+  switch (req.body.action) {
+    case 'delete':
+      Course.delete({_id: {$in: req.body.courseIds}})
+        .then(() => {
+          res.redirect('back');
+        })
+        .catch(err => {
+          next(err);
+        });
+      break;
+    default:
+      res.json({message: 'Action error!'})
+  }
+}
+
+module.exports = {index, show, create, store, edit, update, deleteCourse, deleteCourseForever, restore, handleFormAction};
