@@ -4,11 +4,14 @@ const express = require('express');
 const methodOverride = require('method-override');
 //var mongoose_delete = require('mongoose-delete');
 const morgan = require('morgan');
+const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const path = require('path');
 const {engine} = require('express-handlebars');
 const app = express();
-const port = 3001;
+dotenv.config();
+
+const port = process.env.PORT || 3001;
 
 mongoose.set('strictQuery', false);
 
