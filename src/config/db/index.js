@@ -9,9 +9,9 @@ async function connect() {
         useUnifiedTopology: true,
         //useCreateIndex: true
       });
-    console.log('Connect successfully!');
+    console.log('Connect DB successfully!');
   } catch (error) {
-    console.log('Connect failure!');
+    console.log('Connect DB failure!');
   }
 }
 module.exports = {connect}
