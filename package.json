@@ -6,7 +6,7 @@
   "scripts": {
     "l": "prettier --single-quote --trailing-comma all --tab-width 4 --write src/**/*.{js,json,scss}",
     "git": "lint-staged",
-    "start": "nodemon --inspect src/index.js",
+    "start": "node src/index.js",
     "watch": "node-sass --watch src/resoucres/scss/ --output src/public/css/",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --inspect src/index.js"
