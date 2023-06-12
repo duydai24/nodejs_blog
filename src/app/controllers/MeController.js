@@ -1,20 +1,19 @@
 const {mutipleMongoose, mongooseToObject, mutipleMongooseToObject} = require('../../util/mongoose');
-const Course = require('../models/Course');
+const Product = require('../models/Products');
 
 
-function storedCourses(req, res, next) {
+function storedProducts(req, res, next) {
 
-  Promise.all([Course.find({}), Course.countDocumentsDeleted()])
-    .then(([courses, deleteCount]) => {
-      res.render('me/stored-courses', {
-        courses: mutipleMongooseToObject(courses),
+  Promise.all([Product.find({}), Product.countDocumentsDeleted()])
+    .then(([products, deleteCount]) => {
+      res.render('me/stored-products', {
+        products: mutipleMongooseToObject(products),
         deleteCount
       });
     })
     .catch(err => {
       next(err)
     })
-
   //Course.countDocumentsDeleted()
   //  .then(deleteCount => {
   //    console.log(deleteCount)
@@ -33,14 +32,14 @@ function storedCourses(req, res, next) {
 
 }
 
-function trashCourses(req, res, next) {
-  Course.findDeleted({})
-    .then(courses => {
-      res.render('me/trash-courses', {courses: mutipleMongooseToObject(courses)});
+function trashProducts(req, res, next) {
+  Product.findDeleted({})
+    .then(products => {
+      res.render('me/trash-products', {products: mutipleMongooseToObject(products)});
     })
     .catch(err => {
       next(err);
     });
 }
 
-module.exports = {storedCourses, trashCourses};
+module.exports = {storedProducts, trashProducts};

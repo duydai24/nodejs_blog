@@ -1,8 +1,8 @@
-<form name="container-form" method="POST" action="/courses/handle-form-action"
+<form name="container-form" method="POST" action="/products/handle-form-action"
   class='my-4 container'>
   <p>Khóa học của tôi</p>
   {{#if deleteCount}}
-  <a href='/me/trash/courses'>Thùng rác ({{this.deleteCount}})</a>
+  <a href='/me/trash/products'>Thùng rác ({{this.deleteCount}})</a>
   {{/if}}
   <div class='my-5 d-flex align-items-center justify-content-start'>
     <div class='form-check'>
@@ -33,14 +33,15 @@
       <tr>
         <th scope='col'></th>
         <th scope='col'>STT</th>
-        <th scope='col'>Tên khóa học</th>
-        <th scope='col'>Chi tiết khóa học</th>
+        <th scope='col'>Tên sản phẩm</th>
+        <th scope='col'>Giá sản phẩm</th>
+        <th scope='col'>Chi tiết sản phẩm </th>
         <th scope='col'>Thời gian tạo</th>
         <th scope='col'>Chi tiết</th>
       </tr>
     </thead>
     <tbody>
-      {{#each courses}}
+      {{#each products}}
       <tr>
         <td>
           <div class='form-check'>
@@ -48,19 +49,20 @@
               class='form-check-input'
               type='checkbox'
               value='{{this._id}}'
-              name='courseIds[]'
+              name='productIds[]'
               id='flexCheckDefault' />
           </div>
         </td>
         <th scope='row'>{{sum @index 1}}</th>
         <td>{{this.name}}</td>
+        <td>{{this.sale}}</td>
         <td>{{this.description}}</td>
         <td>{{this.createdAt}}</td>
         <td>
           <a
-            href='/courses/{{this._id}}/edit'
+            href='/products/{{this._id}}/edit'
             class='btn btn-link'
-            data-id='{{this.id}}'>Sửa</a>
+            data-id='{{this._id}}'>Sửa</a>
           <a
             href
             class='btn btn-link'
@@ -72,7 +74,7 @@
       {{else}}
       <tr>
         <td>
-          Bạn chưa đăng khóa học nào.<a href='/courses/create'>
+          Bạn chưa đăng khóa học nào.<a href='/products/create'>
             Đăng kí ngay</a>
         </td>
       </tr>
@@ -80,10 +82,10 @@
     </tbody>
   </table>
 </form>
-{{! Delete Course }}
+{{! Delete product }}
 <form method='POST' name='delete-form'></form>
 
-{{! Confirm delete Course }}
+{{! Confirm delete product }}
 <div class='modal fade' id='exampleModal' tabindex='-1' role='dialog'>
   <div class='modal-dialog'>
     <div class='modal-content'>
@@ -100,7 +102,7 @@
       </div>
       <div class='modal-footer'>
         <button
-          id='btn-delete-course'
+          id='btn-delete-product'
           type='button'
           class='btn btn-danger'>Yes</button>
         <button
@@ -114,33 +116,33 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() { 
-    var courseId; 
+    var productId; 
     var deleteForm = document.forms['delete-form']; 
     var containerForm = document.forms['container-form'];
-    var btnDeleteCourse = document.getElementById('btn-delete-course');
+    var btnDeleteproduct = document.getElementById('btn-delete-product');
     var checkboxAll = $("#checkbox-all");
-    var courseItemCheckbox = $('input[name="courseIds[]"]');
+    var productItemCheckbox = $('input[name="productIds[]"]');
     var checkAllSubmit = $('.btn-check-all-submit');
 
 
   $('#exampleModal').on('show.bs.modal', function(event) { 
     var button = $(event.relatedTarget); 
-    courseId = button.data('id'); 
+    productId = button.data('id'); 
     });
 
-  btnDeleteCourse.onclick = function () { 
-    deleteForm.action = '/courses/' + courseId + '?_method=DELETE'; deleteForm.submit() 
+  btnDeleteproduct.onclick = function () { 
+    deleteForm.action = '/products/' + productId + '?_method=DELETE'; deleteForm.submit() 
   }; 
 
 
     checkboxAll.change(function () {
       var isCheckedAll = $(this).prop('checked');
-      courseItemCheckbox.prop('checked', isCheckedAll);  
+      productItemCheckbox.prop('checked', isCheckedAll);  
       renderCheckAllSubmitBtn();
     });
 
-    courseItemCheckbox.change(function () {
-      var isCheckedAll = courseItemCheckbox.length === $('input[name="courseIds[]"]:checked').length; 
+    productItemCheckbox.change(function () {
+      var isCheckedAll = productItemCheckbox.length === $('input[name="productIds[]"]:checked').length; 
       checkboxAll.prop('checked', isCheckedAll);  
       renderCheckAllSubmitBtn();
     });
@@ -167,7 +169,7 @@
 
 
     function renderCheckAllSubmitBtn () {
-      var checkedCount = $('input[name="courseIds[]"]:checked').length;
+      var checkedCount = $('input[name="productIds[]"]:checked').length;
  
       if (checkedCount >= 1 ) {
         checkAllSubmit.removeClass('disabled');

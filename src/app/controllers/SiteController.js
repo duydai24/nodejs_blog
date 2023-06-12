@@ -1,11 +1,11 @@
 const {mutipleMongoose} = require('../../util/mongoose');
-const Course = require('../models/Course');
+const Product = require('../models/Products');
 const {mutipleMongooseToObject} = require('../../util/mongoose')
 
 function index(req, res, next) {
-    Course.find({})
-        .then(courses => {
-            res.render('home', {courses: mutipleMongooseToObject(courses)});
+    Product.find({})
+        .then(products => {
+            res.render('home', {products: mutipleMongooseToObject(products)});
         })
         .catch(err => {
             next(err);

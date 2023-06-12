@@ -1,10 +1,10 @@
 const {mutipleMongoose, mongooseToObject, mutipleMongooseToObject} = require('../../util/mongoose');
-const Course = require('../models/Course');
+const Product = require('../models/Products');
 
 function index(req, res, next) {
-  Course.find({})
-    .then(courses => {
-      res.render('courses/index', {courses: mutipleMongooseToObject(courses)});
+  Product.find({})
+    .then(product => {
+      res.render('products/index', {product: mutipleMongooseToObject(product)});
     })
     .catch(err => {
       next(err);
@@ -14,28 +14,29 @@ function index(req, res, next) {
 // [GET] /course
 function show(req, res, next) {
 
-  Course.findOne({slug: req.params.slug})
-    .then(courses => {
-      res.render('courses/show', {courses: mongooseToObject(courses)});
+  Product.findOne({slug: req.params.slug})
+    .then(product => {
+      res.render('me/stored/products', {product: mongooseToObject(product)});
     })
     .catch(err => {
       next(err);
     });
 }
 
+
 // [GET] /course/create
 function create(req, res, next) {
 
-  res.render('courses/create')
+  res.render('products/create')
 }
 // [POST] /course/store
 function store(req, res, next) {
   const formData = req.body;
   // formData.image = 'text'
-  const course = new Course(formData);
-  course.save()
+  const product = new Product(formData);
+  product.save()
     .then(() => {
-      res.redirect(`/courses`);
+      res.redirect(`/products`);
     })
     .catch(err => {
       next(err);
@@ -43,9 +44,10 @@ function store(req, res, next) {
 }
 
 function edit(req, res, next) {
-  Course.findById(req.params.id)
-    .then(courses => {
-      res.render('courses/edit', {courses: mongooseToObject(courses)});
+  Product.findById(req.params.id)
+    .then(product => {
+      res.render('products/edit', {product: mongooseToObject(product)});
+      console.log(123);
     })
     .catch(err => {
       next(err);
@@ -54,17 +56,17 @@ function edit(req, res, next) {
 }
 
 function update(req, res, next) {
-  Course.updateOne({_id: req.params.id}, req.body)
+  Product.updateOne({_id: req.params.id}, req.body)
     .then(() => {
-      res.redirect('/me/stored/courses');
+      res.redirect('/me/stored/products');
     })
     .catch(err => {
       next(err);
     });
 }
 
-function deleteCourse(req, res, next) {
-  Course.delete({_id: req.params.id})
+function deleteProduct(req, res, next) {
+  Product.delete({_id: req.params.id})
     .then(() => {
       res.redirect('back');
     })
@@ -73,8 +75,8 @@ function deleteCourse(req, res, next) {
     });
 }
 
-function deleteCourseForever(req, res, next) {
-  Course.deleteOne({_id: req.params.id})
+function deleteProductForever(req, res, next) {
+  Product.deleteOne({_id: req.params.id})
     .then(() => {
       res.redirect('back');
     })
@@ -84,7 +86,7 @@ function deleteCourseForever(req, res, next) {
 }
 
 function restore(req, res, next) {
-  Course.restore({_id: req.params.id})
+  Product.restore({_id: req.params.id})
     .then(() => {
       res.redirect('back');
     })
@@ -97,7 +99,7 @@ function restore(req, res, next) {
 function handleFormAction(req, res, next) {
   switch (req.body.action) {
     case 'delete':
-      Course.delete({_id: {$in: req.body.courseIds}})
+      Product.delete({_id: {$in: req.body.productIds}})
         .then(() => {
           res.redirect('back');
         })
@@ -110,4 +112,4 @@ function handleFormAction(req, res, next) {
   }
 }
 
-module.exports = {index, show, create, store, edit, update, deleteCourse, deleteCourseForever, restore, handleFormAction};
+module.exports = {index, show, create, store, edit, update, deleteProduct, deleteProductForever, restore, handleFormAction};
