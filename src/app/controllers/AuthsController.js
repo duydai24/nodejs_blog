@@ -12,16 +12,30 @@ function login(req, res, next) {
 
 // [GET] /auth/google/callback
 function loginCallback(req, res) {
-  passport.authenticate('google', {
-    successRedirect: '/api/current_user',
-    failureRedirect: '/'
-  })
+  passport.authenticate('google', async (err, user) => {
+    if (err) {
+      // Xử lý lỗi nếu có
+      return res.redirect('/');
+      console.log('Lỗi b1', err);
+    }
+    if (!user) {
+      // Xử lý nếu không có người dùng được trả về
+      return res.redirect('/auth/google');
+    }
+    // Xử lý sau khi xác thực thành công
+
+    if (req.isAuthenticated()) {
+      // Người dùng đã đăng nhập, gán thông tin người dùng vào req.user
+      req.user = user;
+      res.redirect('/auth/api/current_user');
+    } else {
+      res.redirect('/');
+    }
+  })(req, res);
 };
 
 // [GET] /api/current_user
 async function returnUser(req, res, next) {
-  console.log(req.session);
-  console.log(req.user);
   try {
     if (req.user === undefined) {
       res.send(false);
