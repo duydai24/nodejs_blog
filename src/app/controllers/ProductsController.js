@@ -1,5 +1,29 @@
 const {mutipleMongoose, mongooseToObject, mutipleMongooseToObject} = require('../../util/mongoose');
 const Product = require('../models/Products');
+const fs = require('fs');
+
+const getBase64 = (file) => {
+  return new Promise((resolve) => {
+    let fileInfo;
+    let baseURL;
+    // Make new FileReader
+    const reader = new FileReader();
+
+    // Convert the file to base64 text
+    reader.readAsDataURL(file);
+
+    // on reader load somthing...
+    reader.onload = () => {
+      // Make a fileInfo Object
+      console.log("Called", reader);
+      baseURL = reader.result;
+      console.log(baseURL);
+      resolve(baseURL);
+    };
+    console.log(fileInfo);
+  });
+};
+
 
 function index(req, res, next) {
   Product.find({})
@@ -29,10 +53,12 @@ function create(req, res, next) {
 
   res.render('products/create')
 }
+
+
 // [POST] /course/store
 function store(req, res, next) {
   const formData = req.body;
-  // formData.image = 'text'
+
   const product = new Product(formData);
   product.save()
     .then(() => {
@@ -47,7 +73,6 @@ function edit(req, res, next) {
   Product.findById(req.params.id)
     .then(product => {
       res.render('products/edit', {product: mongooseToObject(product)});
-      console.log(123);
     })
     .catch(err => {
       next(err);

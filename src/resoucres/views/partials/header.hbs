@@ -1,5 +1,5 @@
 <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
-  <a class='navbar-brand' href='/'>Đại Blog</a>
+  <a class='navbar-brand' href='/'>SaleOff</a>
   <button
     class='navbar-toggler'
     type='button'
@@ -12,14 +12,18 @@
   </button>
 
   <div class='collapse navbar-collapse' id='navbarSupportedContent'>
-    <ul class='navbar-nav mr-auto'>
-      {{!<li class='nav-item active'>
-        <a class='nav-link' href='#'>Home
-          <span class='sr-only'>(current)</span></a>
-      </li>}}
-      {{!<li class='nav-item'>
-        <a class='nav-link' href='/products/create'>Tạo khóa học</a>
-      </li>}}
+    <ul class='navbar-nav mr-auto container'>
+      <li style="nav-item color: white; font-weight: bold;" class='nav-item'>
+        <a class='nav-link' href='/me/stored/products'>Sản phẩm của tôi</a>
+      </li>
+      <li class='nav-item color: white; font-weight: bold;'>
+        <a style="nav-link" class='nav-link' href='/products/create'>Tạo
+          Sản phẩm</a>
+      </li>
+      <li class='nav-item color: white; font-weight: bold;'>
+        <a style="nav-link" class='nav-link' href='/auth/users/allUser'>Người
+          dùng</a>
+      </li>
       <li class='nav-item dropdown'>
         <a
           class='nav-link dropdown-toggle'
@@ -29,27 +33,29 @@
           data-toggle='dropdown'
           aria-haspopup='true'
           aria-expanded='false'>
+          {{#if user}}
           <div class='user-container'>
             <img
               class='img-user mr-2'
-              src='https://files.fullstack.edu.vn/f8-prod/user_photos/178751/6225e29c705b7.jpg'
-              alt />
-            <p>Duy Đại</p>
+              src='{{user._doc.image}}'
+              alt="image-user" />
+            <p>user.name</p>
           </div>
+          {{else}}
+          Đăng nhập
+          {{/if}}
         </a>
         <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
-          <a class='dropdown-item' href='/products/create'>Tạo khóa học</a>
+          <a class='dropdown-item' href='/products/create'>Tạo Sản phẩm</a>
           <div class='dropdown-divider'></div>
-          <a class='dropdown-item' href='/me/stored/products'>Khoá học của tôi</a>
+          <a class='dropdown-item' href='/me/stored/products'>Sản phẩm của tôi</a>
           <div class='dropdown-divider'></div>
-          <a class='dropdown-item' href='#'>Đăng xuất</a>
+          <a class='dropdown-item' href='/auth/google'>Đăng nhập</a>
         </div>
       </li>
-      {{!<li class='nav-item'>
-        <a class='nav-link disabled' href='#'>Disabled</a>
-      </li>}}
+
     </ul>
-    {{!<form class='form-inline my-2 my-lg-0'>
+    <form class='form-inline my-2 my-lg-0'>
       <input
         class='form-control mr-sm-2'
         type='search'
@@ -58,6 +64,8 @@
       <button
         class='btn btn-outline-success my-2 my-sm-0'
         type='submit'>Search</button>
-    </form>}}
+
+    </form>
+    <div id="google-signin-button"></div>
   </div>
 </nav>

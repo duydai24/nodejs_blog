@@ -1,0 +1,28 @@
+<form name="container-form" method="POST" action="/products/handle-form-action"
+  class='my-4 container'>
+  <p>Tất cả người dùng</p>
+
+  <table class='table'>
+    <thead>
+      <tr>
+        <th scope='col'></th>
+        <th scope='col'>STT</th>
+        <th scope='col'>Ảnh</th>
+        <th scope='col'>Tên</th>
+        <th scope='col'>Thời gian tạo</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each user}}
+      <tr>
+        <td>
+        </td>
+        <th scope='row'>{{sum @index 1}}</th>
+        <td><img style="border-radius: 20px;" src="{{this.image}}" alt /></td>
+        <td>{{this.name}}</td>
+        <td>{{this.createdAt}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</form>

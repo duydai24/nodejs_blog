@@ -1,6 +1,6 @@
 <form name="container-form" method="POST" action="/products/handle-form-action"
   class='my-4 container'>
-  <p>Khóa học của tôi</p>
+  <p>Sản phẩm của tôi</p>
   {{#if deleteCount}}
   <a href='/me/trash/products'>Thùng rác ({{this.deleteCount}})</a>
   {{/if}}
@@ -34,6 +34,7 @@
         <th scope='col'></th>
         <th scope='col'>STT</th>
         <th scope='col'>Tên sản phẩm</th>
+        <th scope='col'>Ảnh sản phẩm</th>
         <th scope='col'>Giá sản phẩm</th>
         <th scope='col'>Chi tiết sản phẩm </th>
         <th scope='col'>Thời gian tạo</th>
@@ -55,6 +56,7 @@
         </td>
         <th scope='row'>{{sum @index 1}}</th>
         <td>{{this.name}}</td>
+        <td><img src="{{this.imageBase64}}" alt="imageProduct" width="100" height="auto" /></td>
         <td>{{this.sale}}</td>
         <td>{{this.description}}</td>
         <td>{{this.createdAt}}</td>
@@ -74,7 +76,7 @@
       {{else}}
       <tr>
         <td>
-          Bạn chưa đăng khóa học nào.<a href='/products/create'>
+          Bạn chưa đăng Sản phẩm nào.<a href='/products/create'>
             Đăng kí ngay</a>
         </td>
       </tr>
@@ -90,7 +92,7 @@
   <div class='modal-dialog'>
     <div class='modal-content'>
       <div class='modal-header'>
-        <h1 class='modal-title fs-5' id='exampleModalLabel'>Xóa Khóa học</h1>
+        <h1 class='modal-title fs-5' id='exampleModalLabel'>Xóa Sản phẩm</h1>
         <button
           type='button'
           class='btn-close'

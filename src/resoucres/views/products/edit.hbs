@@ -14,11 +14,21 @@
     <div class='form-group'>
       <label for='image'>Ảnh sản phẩm: </label>
       <input
-        type='text'
+        type='file'
         class='form-control'
-        value='{{product.image}}'
+        value
         id='image'
         name='image'
+        placeholder='Enter image' />
+      <img id='previewImage' src="{{product.imageBase64}}" alt="Product Image" width="400px"
+        height="auto">
+      <input
+        style="visibility: hidden;"
+        type='text'
+        class='form-control'
+        id='imageBase64'
+        name='imageBase64'
+        value
         placeholder='Enter image' />
     </div>
     <div class='form-group'>
@@ -83,3 +93,32 @@
     <button type='submit' class='btn btn-primary'>Lưu sản phẩm</button>
   </form>
 </div>
+
+<script>
+function previewImage(event) {
+  const file = event.target.files[0];
+console.log(file, 'previewImage')
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const base64Image = e.target.result;
+    console.log(base64Image)
+    const previewImage = document.getElementById('previewImage');
+    console.log(previewImage)
+    previewImage.src = base64Image;
+    previewImage.style.display = 'block';
+    
+
+    // Gán giá trị base64 cho thẻ input
+    const imageInput = document.getElementById('imageBase64');
+    imageInput.value = base64Image;
+  };
+
+  reader.readAsDataURL(file);
+}
+
+const imageInput = document.getElementById('image');
+imageInput.addEventListener('change', previewImage);
+
+
+</script>

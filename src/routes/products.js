@@ -15,4 +15,4 @@ router.get('/:slug', productsController.show);
 router.get('/', productsController.index);
 
 
-module.exports = router;  
+module.exports = router;
