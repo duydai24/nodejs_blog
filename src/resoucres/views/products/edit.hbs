@@ -97,14 +97,11 @@
 <script>
 function previewImage(event) {
   const file = event.target.files[0];
-console.log(file, 'previewImage')
 
   const reader = new FileReader();
   reader.onload = function(e) {
     const base64Image = e.target.result;
-    console.log(base64Image)
     const previewImage = document.getElementById('previewImage');
-    console.log(previewImage)
     previewImage.src = base64Image;
     previewImage.style.display = 'block';
     

@@ -9,20 +9,27 @@
         <th scope='col'>STT</th>
         <th scope='col'>Ảnh</th>
         <th scope='col'>Tên</th>
+        <th scope='col'>Quyền hạn</th>
         <th scope='col'>Thời gian tạo</th>
+        <th scope='col'>Chức năng</th>
       </tr>
     </thead>
     <tbody>
-      {{#each user}}
+      {{#each users}}
       <tr>
         <td>
         </td>
         <th scope='row'>{{sum @index 1}}</th>
-        <td><img style="border-radius: 20px;" src="{{this.image}}" alt /></td>
+        <td><img style="border-radius: 20px;" src="{{this.image}}" alt="imageUser" /></td>
         <td>{{this.name}}</td>
+        <td>{{this.role}}</td>
         <td>{{this.createdAt}}</td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
-</form>
+        <td><a
+            href='/users/{{this._id}}/edit'
+            class='btn btn-link'
+            data-id='{{this._id}}'>Cấp quyền</a>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </form>

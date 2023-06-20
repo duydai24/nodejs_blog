@@ -1,2 +1,12 @@
-<h1 style="margin-top: 100px; margin-bottom: 100px; text-align: center;">Trang quản trị hệ thống
+<h1 style="margin-top: 100px; text-align: center;">Trang quản trị hệ thống
   saleOff</h1>
+{{#if user}}
+<p
+  style="margin-top: 20px; margin-bottom: 100px; text-align: center; color: red;">Chào
+  mừng
+  <a style="font-weight: bold; color: blue;"> {{user.name}} </a> đến
+  với SaleOff</p>
+{{else}}
+<p style="margin-top: 20px; margin-bottom: 100px; text-align: center; color: red;">Vui lòng
+  <a href="auth/google">đăng nhập!</a></p>
+{{/if}}

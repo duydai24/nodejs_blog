@@ -68,19 +68,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get(
-  '/auth/google',
-  passport.authenticate('google', {
-    scope: ['profile', 'email']
-  })
-);
-
-app.get('/auth/google/callback',
-  passport.authenticate('google', {
-    successRedirect: '/auth/api/current_user',
-    failureRedirect: '/'
-  }));
-
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -90,7 +77,7 @@ app.use(sessionExpress({
   resave: false, // Không lưu lại phiên trong trường hợp không có thay đổi
   saveUninitialized: false, // Không lưu lại phiên chưa được khởi tạo
   cookie: {
-    secure: true, // true nếu sử dụng HTTPS
+    secure: false, // true nếu sử dụng HTTPS
     maxAge: 30 * 24 * 60 * 60 * 100, // Thời gian sống của cookie phiên (trong millisecond)
   },
 }));
@@ -106,21 +93,16 @@ app.use((err, req, res, next) => {
   res.status(500).json({error: 'Internal Server Error'});
 });
 
-// Middleware xác thực và gán thông tin người dùng vào req.user
-function authenticateUser(req, res, next) {
-  // Kiểm tra xem người dùng đã đăng nhập hay chưa
-  if (req.isAuthenticated()) {
-    // Người dùng đã đăng nhập, gán thông tin người dùng vào req.user
-    req.user = req.session.passport.user;
-    console.log(req.session.passport.user, 'req.session.passport.user');
+app.use((req, res, next) => {
+  if (req?.user) {
+    req.session.user = req.user._doc;
+    res.locals.user = req.session.user;
   }
   next();
-}
+});
 
-// Sử dụng middleware authenticateUser trước các route cần xác thực
-app.use(authenticateUser);
 
-//router init - khởi tạo tuyến đường
+//router init - khởi to tuyến đường
 route(app);
 
 app.listen(port, () => {

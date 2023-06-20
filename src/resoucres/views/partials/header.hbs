@@ -21,9 +21,9 @@
           Sản phẩm</a>
       </li>
       <li class='nav-item color: white; font-weight: bold;'>
-        <a style="nav-link" class='nav-link' href='/auth/users/allUser'>Người
-          dùng</a>
+        <a style="nav-link" class='nav-link' href='/users/allUser'>Quản lý người dùng</a>
       </li>
+      {{#if user}}
       <li class='nav-item dropdown'>
         <a
           class='nav-link dropdown-toggle'
@@ -33,27 +33,23 @@
           data-toggle='dropdown'
           aria-haspopup='true'
           aria-expanded='false'>
-          {{#if user}}
-          <div class='user-container'>
+          <div style="margin-left: 20px;" class='user-container'>
             <img
               class='img-user mr-2'
-              src='{{user._doc.image}}'
+              src='{{user.image}}'
               alt="image-user" />
-            <p>user.name</p>
+            <p style="margin: 0px; color: white;">{{user.name}}</p>
           </div>
-          {{else}}
-          Đăng nhập
-          {{/if}}
         </a>
         <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
-          <a class='dropdown-item' href='/products/create'>Tạo Sản phẩm</a>
-          <div class='dropdown-divider'></div>
-          <a class='dropdown-item' href='/me/stored/products'>Sản phẩm của tôi</a>
-          <div class='dropdown-divider'></div>
-          <a class='dropdown-item' href='/auth/google'>Đăng nhập</a>
+          <a class='dropdown-item' href='/auth/api/logout'>Đăng xuất - "{{user.name}}"</a>
         </div>
       </li>
-
+      {{else}}
+      <li class='nav-item color: white; font-weight: bold;'>
+        <a style="nav-link" class='nav-link' href='/auth/google'>Đăng nhập with Google</a>
+      </li>
+      {{/if}}
     </ul>
     <form class='form-inline my-2 my-lg-0'>
       <input

@@ -28,7 +28,6 @@ async function saveImageToAzureBlobStorage(base64Image, imageName) {
 function store(req, res, next) {
   const formData = req.body;
   const base64Image = req.body.image;
-  console.log(base64Image);
   const imageBuffer = Buffer.from(base64Image).toString('base64');
 
   if (imageBuffer) {
