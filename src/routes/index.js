@@ -13,7 +13,7 @@ function route(app) {
     app.use('/news', requireEditer, newsRouter);
     app.use('/me', requireEditer, meRouter);
     app.use('/products', requireEditer, productsRouter);
-    app.use('/api', requireEditer, apiRouter);
+    app.use('/api', apiRouter);
     app.use('/auth', authRouter);
     app.use('/users', requireAdmin, userRouter);
     app.use('/', siteRouter);
