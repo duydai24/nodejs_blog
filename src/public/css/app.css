@@ -14,22 +14,25 @@ h1 {
 .dropdown-toggle::after {
   display: none !important; }
 
-@media (min-width: 1200px) {
+@media (min-width: 390px) {
   .container {
-    max-width: 1590px !important; } }
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1200px !important; } }
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 1024px !important; } }
+    max-width: 960px !important; } }
 
 @media (min-width: 425px) {
   .container {
     max-width: 768px !important; } }
 
-@media (min-width: 390px) {
+@media (min-width: 768px) {
   .container {
-    max-width: 425px !important; } }
+    max-width: 1024px !important; } }
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1200px !important; } }
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1590px !important; } }
+
+.navbar {
+  padding: 1.5rem 2rem; }
