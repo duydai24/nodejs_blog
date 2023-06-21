@@ -13,6 +13,7 @@ const bodyParser = require('body-parser');
 const sessionExpress = require('express-session');
 const keys = require('./util/key');
 const flash = require('connect-flash');
+const cors = require('cors');
 const app = express();
 dotenv.config();
 
@@ -67,6 +68,13 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
+
+const corsOptions = {
+  origin: '*',
+  credentials: true,            //access-control-allow-credentials:true
+  optionSuccessStatus: 200
+}
+app.use(cors(corsOptions)); // Use this after the variable declaration
 
 app.use(cookieParser());
 app.use(bodyParser.json());
