@@ -62,7 +62,7 @@ app.use(methodOverride('_method'))
 
 // Cấu hình CORS
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://www.saleoff.tech'); // Thay đổi địa chỉ tùy theo nguồn gốc của ứng dụng
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Thay đổi địa chỉ tùy theo nguồn gốc của ứng dụng
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
